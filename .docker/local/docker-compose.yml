@@ -10,17 +10,17 @@ services:
     volumes:
       - /data/postgres/
     networks:
-      - kingex-network
+      - network
   adminer:
     image: adminer
     restart: always
     links:
       - dev_db
     networks:
-      - kingex-network
+      - network
     ports:
       - 8080:8080
 
 networks:
-  kingex-network:
+  network:
     driver: bridge

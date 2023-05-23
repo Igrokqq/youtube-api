@@ -15,8 +15,8 @@ import * as compression from 'compression';
 
 function setupSwagger(app: INestApplication): void {
   const config = new DocumentBuilder()
-    .setTitle('Kingex 2.0 API')
-    .setDescription('The Kingex API documentation')
+    .setTitle('API')
+    .setDescription('The API documentation')
     .setVersion('1.0')
     .addTag('Backend')
     .addSecurity('bearerAuth', {
