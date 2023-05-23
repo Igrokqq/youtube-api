@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  dev_db:
+    container_name: dev_db
+    image: postgres:${POSTGRES_VERSION}
+    env_file:
+      - .env
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - /data/postgres/
+    networks:
+      - kingex-network
+  adminer:
+    image: adminer
+    restart: always
+    links:
+      - dev_db
+    networks:
+      - kingex-network
+    ports:
+      - 8080:8080
+
+networks:
+  kingex-network:
+    driver: bridge

@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                   String?
+  platform             String?   @map("_platform")
+  username             String?
+  full_name            String?
+  description          String?
+  created_time         DateTime?
+  lang                 String[]
+  followers_count      Int?
+  is_verified          Boolean?
+  restricted           String[]
+  addedAt              DateTime? @map("_added_at")
+  updatedAt            DateTime? @updatedAt @map("_updated_at")
+  internalID           Int       @id @map("_id")
+  status               String?   @map("_status")
+  status_details       Json?     @map("_status_details")
+  active               Boolean?  @map("_active")
+  source_id            Int?      @map("_source_id")
+  id_alt               String?
+  posts_count          Int?
+  jenkins_build_number Int?
+  jenkins_job_name     String?
+
+  @@map("accounts")
+}
+
+model Post {
+  internalID                 Int       @id @default(autoincrement())
+  character                  String?
+  platform                   String?   @map("_platform")
+  original_post_author_id    String?   @map("original_post_author_id")
+  created_time               DateTime? @map("created_time")
+  type                       String?   @map("type")
+  links                      String[]
+  domains                    String[]
+  text_original              String?   @map("text_original")
+  lang                       String?   @map("lang")
+  likes_count                Int?
+  shares_count               Int?
+  comments_count             Int?
+  views_count                Int?
+  toxicity                   Float?
+  severe_toxicity            Float?
+  threat                     Float?
+  identity_attack            Float?
+  insult                     Float?
+  profanity                  Float?
+  restricted                 String[]
+  added_at                   DateTime? @map("_added_at")
+  updated_at                 DateTime? @updatedAt @map("_updated_at")
+  engagement                 Int?
+  engagement_identified      Int?
+  nf_engagement_n            Int?
+  nf_engagement_p            Float?
+  engagers_unique            String[]
+  engagers_unique_n          Int?
+  engagers_unique_p          Float?
+  nf_unique_engagement_n     Int?
+  id                         Int?      @map("_id")
+  private_account_id         Int?      @map("_account_id")
+  replied_to_id              String?   @map("_replied_to_id")
+  text_additional            String?   @map("_text_additional")
+  status                     String?   @map("_status")
+  status_details             Json?     @map("_status_details")
+  active                     Boolean?  @map("_active")
+  original_post_id           String?   @map("_original_post_id")
+  post_platform_id_new       String?   @map("_post_platform_id_new")
+  follower_engagement_n      Int?      @map("_follower_engagement_n")
+  follower_engagers_unique_n Int?      @map("_follower_engagers_unique_n")
+  account_id                 String?   @map("account_id")
+  jenkins_build_number       Int?      @map("_jenkins_build_number")
+  jenkins_job_name           String?   @map("_jenkins_job_name")
+  perspective                Boolean?  @map("_perspective")
+
+  @@map("posts")
+}
+
+model Source {
+  id                     Int        @id @default(autoincrement()) @map("_id")
+  platform_id            String?    @map("platform_id")
+  platform_username      String?    @map("platform_username")
+  owner_name             String?    @map("owner_name")
+  platform              String?    @map("_platform")
+  url                    String?    @map("url")
+  languages              String[]  @map("languages")
+  verified               Boolean?   @map("verified")
+  edge_case              Boolean?   @map("edge_case")
+  labelled               Boolean?   @map("labelled")
+  availability           String?    @map("availability")
+  n_posts                Int?       @map("n_posts")
+  likes_median           Int?       @map("likes_median")
+  shares_median          Int?       @map("shares_median")
+  comments_median        Int?       @map("comments_median")
+  date_first             DateTime?  @map("date_first")
+  date_last              DateTime?  @map("date_last")
+  engagement_median      Float?     @map("engagement_median")
+  outlinks_percentage    Float?     @map("outlinks_percentage")
+  outlink_top            String?    @map("outlink_top")
+  perspective_n          Int?       @map("perspective_n")
+  severe_toxicity_n      Int?       @map("severe_toxicity_n")
+  identity_attack_n      Int?       @map("identity_attack_n")
+  threat_n               Int?       @map("threat_n")
+  severe_toxicity_p      Float?     @map("severe_toxicity_p")
+  identity_attack_p      Float?     @map("identity_attack_p")
+  threat_p               Float?     @map("threat_p")
+  toxic_likes_median     Int?       @map("toxic_likes_median")
+  toxic_shares_median    Int?       @map("toxic_shares_median")
+  toxic_comments_median  Int?       @map("toxic_comments_median")
+  toxic_engagement_median Int?      @map("toxic_engagement_median")
+  subscribers_start      Int?       @map("subscribers_start")
+  subscribers_end        Int?       @map("subscribers_end")
+  subscriber_growth_n    Int?       @map("subscriber_growth_n")
+  subscriber_growth_p    Float?     @map("subscriber_growth_p")
+  exposure_n             Int?       @map("exposure_n")
+  exposure_median        Int?       @map("exposure_median")
+  toxic_exposure         Int?       @map("toxic_exposure")
+  toxic_n                Int?       @map("toxic_n")
+  added_at              DateTime?  @map("_added_at")
+  updatedAt            DateTime? @updatedAt  @map("_updated_at")
+  subscribers_start_date DateTime?  @map("subscribers_start_date")
+  subscribers_end_date   DateTime?  @map("subscribers_end_date")
+
+  @@map("sources")
+}
