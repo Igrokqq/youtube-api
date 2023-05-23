@@ -13,7 +13,7 @@ export class AccountService {
     private readonly youtubeService: YouTubeService,
   ) {}
 
-  @Cron(CronExpression.EVERY_SECOND)
+  @Cron(CronExpression.EVERY_10_SECONDS)
   async updateYouTubeAccounts() {
     const sources = await this.prisma.source.findMany({
       where: { platform: PlatformType.YouTube },
